@@ -136,7 +136,7 @@ $RECYCLE.BIN/
 *.lnk
 
 ### Gradle ###
-.gradle
+# .gradle
 /build/
 
 # Ignore Gradle GUI config
@@ -184,13 +184,13 @@ ctre_sim/
 compile_commands.json
 
 # Eclipse generated file for annotation processors
-.factorypath
-/vendordeps
-gradlew
-gradlew.bat
-settings.gradle
-simgui-ds.json
-/gradle
-WPILib-License.md
-.wpilib
-.vscode
+# .factorypath
+# /vendordeps
+# gradlew
+# gradlew.bat
+# settings.gradle
+# simgui-ds.json
+# /gradle
+# WPILib-License.md
+# .wpilib
+# .vscode
