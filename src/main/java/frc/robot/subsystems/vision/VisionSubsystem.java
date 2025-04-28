@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 import org.littletonrobotics.junction.Logger;
 
-import com.team254.frc2024.Constants;
 import com.team254.frc2024.RobotState;
 import com.team254.lib.time.RobotTime;
 import com.team254.lib.util.Util;
@@ -143,7 +142,7 @@ public class VisionSubsystem extends SubsystemBase {
     private List<PinholeObservation> getPinholeObservations(FiducialObservation[] fiducials, boolean isTurretCamera) {
         // Iterate over the fiducials to make VisionUpdates
         return Arrays.stream(fiducials).map(fiducial -> {
-            Optional<Pose3d> tagPoseOptional = Constants.kAprilTagLayout.getTagPose(fiducial.id);
+            Optional<Pose3d> tagPoseOptional = VisionConstants.kAprilTagLayout.getTagPose(fiducial.id);
             if (tagPoseOptional.isEmpty()) {
                 return null;
             }
@@ -171,7 +170,7 @@ public class VisionSubsystem extends SubsystemBase {
         cameraToTarget = cameraToTarget
                 .plus(new Transform3d(new Translation3d(), new Rotation3d(0.0, 0.0, yawRadians)));
         Transform3d cameraGroundPlaneToCamera = new Transform3d(new Translation3d(),
-                new Rotation3d(0.0, isTurretCamera ? Constants.kCameraPitchRads : Constants.kCameraBPitchRads, 0));
+                new Rotation3d(0.0, isTurretCamera ? VisionConstants.kCameraPitchRads : VisionConstants.kCameraBPitchRads, 0));
         Rotation3d cameraGroundPlaneToTarget = new Pose3d().plus(cameraGroundPlaneToCamera.plus(cameraToTarget))
                 .getRotation().unaryMinus();
 
@@ -190,7 +189,7 @@ public class VisionSubsystem extends SubsystemBase {
         // Find the fixed height difference between the center of the tag and the camera
         // lens
         double differential_height = tagLocation.getZ()
-                - (isTurretCamera ? Constants.kCameraHeightOffGroundMeters : Constants.kCameraBHeightOffGroundMeters);
+                - (isTurretCamera ? VisionConstants.kCameraHeightOffGroundMeters : VisionConstants.kCameraBHeightOffGroundMeters);
 
         // We now obtain 3d distance by dividing differential_height by our normalized z
         // component z / (Math.sqrt(x^2+y^2+z^2))

@@ -52,7 +52,7 @@ public class VisionIOSimPhoton extends VisionIOHardwareLimelight {
 
         // Add all the AprilTags inside the tag layout as visible targets to this
         // simulated field.
-        visionSim.addAprilTags(Constants.kAprilTagLayout);
+        visionSim.addAprilTags(VisionConstants.kAprilTagLayout);
 
         // Create simulated camera properties. These can be set to mimic your actual
         // camera.
@@ -79,10 +79,10 @@ public class VisionIOSimPhoton extends VisionIOHardwareLimelight {
 
         Transform3d robotToElevatorCamera = new Transform3d(
                 new Translation3d(
-                        Constants.kTurretToCameraBX,
-                        Constants.kTurretToCameraBY,
-                        Constants.kCameraBHeightOffGroundMeters),
-                new Rotation3d(0.0, -Constants.kCameraBPitchRads, 0.0));
+                        VisionConstants.kTurretToCameraBX,
+                        VisionConstants.kTurretToCameraBY,
+                        VisionConstants.kCameraBHeightOffGroundMeters),
+                new Rotation3d(0.0, -VisionConstants.kCameraBPitchRads, 0.0));
         visionSim.addCamera(elevatorCameraSim, robotToElevatorCamera);
         objectSim.addCamera(elevatorNoteCameraSim, robotToElevatorCamera);
 
@@ -101,12 +101,7 @@ public class VisionIOSimPhoton extends VisionIOHardwareLimelight {
         turretCameraSim.enableDrawWireframe(true);
         elevatorCameraSim.enableDrawWireframe(true);
 
-        for (var entry : Constants.kMidlineNoteTranslations.entrySet()) {
-            var translation = entry.getValue();
-            addNoteTarget(new Pose3d(translation.getX(),
-                    translation.getY(), Units.inchesToMeters(1.0),
-                    new Rotation3d()));
-        }
+       
     }
 
     public void addNoteTarget(Pose3d pose) {
@@ -135,15 +130,15 @@ public class VisionIOSimPhoton extends VisionIOHardwareLimelight {
                     new Translation3d(),
                     new Rotation3d(0.0, 0.0, turretRotation.getValue().getRadians()));
             Transform3d turretToCamera = new Transform3d(
-                    new Translation3d(Constants.kTurretToCameraX,
-                            Constants.kTurretToCameraY,
-                            Constants.kCameraHeightOffGroundMeters),
-                    new Rotation3d(0.0, -Constants.kCameraPitchRads, 0.0));
+                    new Translation3d(VisionConstants.kTurretToCameraX,
+                    VisionConstants.kTurretToCameraY,
+                    VisionConstants.kCameraHeightOffGroundMeters),
+                    new Rotation3d(0.0, -VisionConstants.kCameraPitchRads, 0.0));
             Transform3d robotToCamera = robotToTurret.plus(turretToCamera);
             visionSim.adjustCamera(turretCameraSim, robotToCamera);
         }
-        NetworkTable turretTable = NetworkTableInstance.getDefault().getTable(Constants.kLimelightTableName);
-        NetworkTable elevatorTable = NetworkTableInstance.getDefault().getTable(Constants.kLimelightBTableName);
+        NetworkTable turretTable = NetworkTableInstance.getDefault().getTable(VisionConstants.kLimelightTableName);
+        NetworkTable elevatorTable = NetworkTableInstance.getDefault().getTable(VisionConstants.kLimelightBTableName);
         // Write to limelight table
         writeToTable(turretCamera.getLatestResult(), turretTable);
         writeToTable(elevatorCamera.getLatestResult(), elevatorTable);

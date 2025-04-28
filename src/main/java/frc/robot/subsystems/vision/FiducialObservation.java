@@ -1,3 +1,5 @@
+package frc.robot.subsystems.vision;
+
 import java.nio.ByteBuffer;
 
 import frc.robot.util.LimelightHelpers;
