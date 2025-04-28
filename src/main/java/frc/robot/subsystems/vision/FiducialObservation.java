@@ -1,3 +1,5 @@
+package frc.robot.subsystems.vision;
+
 import java.nio.ByteBuffer;
 
 import frc.robot.util.LimelightHelpers;
@@ -5,7 +7,7 @@ import edu.wpi.first.util.struct.Struct;
 import edu.wpi.first.util.struct.StructSerializable;
 
 public class FiducialObservation implements StructSerializable {
-    public static class FiducialObservationStruct implements Struct<FiducialObservation> {
+    public static class FiducialObservationStruct implements Struct<FiducialObservation>{
         public int id;
         public double txnc;
         public double tync;
